@@ -6,7 +6,7 @@
 #    By: kmira <kmira@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/07 02:00:29 by kmira             #+#    #+#              #
-#    Updated: 2020/02/07 02:27:15 by kmira            ###   ########.fr        #
+#    Updated: 2020/02/07 02:29:08 by kmira            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ quick: re clean
 save: fclean
 	git add .
 	git commit -m "$(MSG)"
-	git push https://github.com/MrColour/filler.git
 	git push
+	git push https://github.com/MrColour/filler.git
 
 .PHONY: all clean fclean re quick save
