@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 05:35:31 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/07 05:38:46 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/07 06:33:54 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,23 @@ void	init_debug(void)
 
 	debug_out = open(DEBUG_FILE_PATH, O_RDWR);
 	debug_fd(DEBUG_SET, debug_out);
+}
+
+void	debug_out(void *memory, size_t size)
+{
+	int	out_fd;
+
+	out_fd = debug_fd(DEBUG_GET, 0);
+	write(out_fd, memory, size);
+}
+
+void	debug_out_str(char *str)
+{
+	int	size;
+	int	out_fd;
+
+	size = ft_strlen(str);
+	out_fd = debug_fd(DEBUG_GET, 0);
+	debug_out(str, size);
+	write(out_fd, "\n", 1);
 }
