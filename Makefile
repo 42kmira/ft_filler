@@ -6,7 +6,7 @@
 #    By: kmira <kmira@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/07 02:00:29 by kmira             #+#    #+#              #
-#    Updated: 2020/02/07 06:07:36 by kmira            ###   ########.fr        #
+#    Updated: 2020/02/10 13:14:41 by kmira            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,8 @@ LIBFT = srcs/libft/libft.a
 
 FILES = \
 	debug \
+	heatmap_color \
+	update_game_state \
 	initialize_game \
 	main \
 

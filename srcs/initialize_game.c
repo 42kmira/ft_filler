@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 05:47:45 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/07 06:40:12 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/08 02:53:05 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,10 @@ void	move_stdin_ptr_to_board_size(void)
 
 	ft_bzero(buff, sizeof(buff));
 	while (buff[0] != ']')
-	{
 		read(STDIN_FILENO, buff, 1);
-		debug_out(buff, 1);
-	}
 	read(STDIN_FILENO, buff, 1);
 	ft_bzero(buff, sizeof(buff));
-	read(STDIN_FILENO, buff, PLATEAU_ + 1);
-	debug_out_str(buff);
+	read(STDIN_FILENO, buff, PLATEAU_);
 }
 
 #define DIGIT_LEN 20
@@ -57,13 +53,13 @@ int		get_board_height(void)
 	i = 0;
 	result = -1;
 	ft_bzero(number, sizeof(number));
+	read(STDIN_FILENO, &number[i], 1);
 	while (number[i] != ' ')
 	{
-		read(STDIN_FILENO, &number[i], 1);
 		i++;
+		read(STDIN_FILENO, &number[i], 1);
 	}
-	debug_out_str("WRITING HIEGHT\n");
-	debug_out_str(number);
+	number[i] = '\0';
 	result = ft_atoi(number);
 	return (result);
 }
@@ -77,20 +73,34 @@ int		get_board_width(void)
 	i = 0;
 	result = -1;
 	ft_bzero(number, sizeof(number));
-	while (number[i] != '\n')
+	read(STDIN_FILENO, &number[i], 1);
+	while (number[i] != ':')
 	{
-		read(STDIN_FILENO, &number[i], 1);
 		i++;
+		read(STDIN_FILENO, &number[i], 1);
 	}
-	debug_out_str("WRITING WIDTH\n");
-	debug_out_str(number);
+	number[i] = '\0';
 	result = ft_atoi(number);
 	return (result);
 }
 
+void			init_board(t_filler_context *context)
+{
+	int		i;
+
+	i = 0;
+	context->board = malloc(sizeof(*context->board) * (context->board_height + 1));
+	while (i < context->board_height)
+	{
+		context->board[i] = malloc(sizeof(*(context->board[i])) * (context->board_width + 1));
+		context->board[i][context->board_width + 1] = '\0';
+		i++;
+	}
+	context->board[i] = NULL;
+}
+
 t_filler_context	init_game_context(void)
 {
-	int					i;
 	t_filler_context	filler_context;
 
 	filler_context.player_no = get_player_no();
@@ -101,18 +111,7 @@ t_filler_context	init_game_context(void)
 	move_stdin_ptr_to_board_size();
 	filler_context.board_height = get_board_height();
 	filler_context.board_width = get_board_width();
-	filler_context.board = malloc(sizeof(*filler_context.board)
-							* (filler_context.board_height + 1));
-	ft_bzero(filler_context.board, sizeof(*filler_context.board)
-							* (filler_context.board_height + 1));
-	i = 0;
-	while (i < filler_context.board_height)
-	{
-		filler_context.board[i] = malloc(sizeof(*(filler_context.board[i]))
-										* (filler_context.board_width + 1));
-		ft_bzero(filler_context.board[i], sizeof(*(filler_context.board[i]))
-										* (filler_context.board_width + 1));
-		i++;
-	}
+	init_board(&filler_context);
+	update_board(&filler_context);
 	return (filler_context);
 }

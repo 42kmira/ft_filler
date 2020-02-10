@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 05:35:31 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/07 06:33:54 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/08 02:00:17 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,16 @@ void	debug_out_str(char *str)
 	out_fd = debug_fd(DEBUG_GET, 0);
 	debug_out(str, size);
 	write(out_fd, "\n", 1);
+}
+
+void	debug_out_board(t_filler_context *context)
+{
+	int	row;
+
+	row = 0;
+	while (row < context->board_height)
+	{
+		debug_out_str(context->board[row]);
+		row++;
+	}
 }
