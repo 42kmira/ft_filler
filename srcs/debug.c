@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 05:35:31 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/08 02:00:17 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/10 21:37:49 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,3 +59,16 @@ void	debug_out_board(t_filler_context *context)
 		row++;
 	}
 }
+
+// void	debug_out_piece(t_filler_context *context)
+// {
+// 	char	*string;
+// 	t_piece	*iter;
+
+// 	iter = context->player;
+// 	while (iter != NULL)
+// 	{
+// 		string = asprintf("");
+// 		iter = iter->next;
+// 	}
+// }

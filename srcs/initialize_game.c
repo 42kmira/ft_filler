@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 05:47:45 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/08 02:53:05 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/10 21:42:53 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ void	move_stdin_ptr_to_board_size(void)
 	ft_bzero(buff, sizeof(buff));
 	read(STDIN_FILENO, buff, PLATEAU_);
 }
-
-#define DIGIT_LEN 20
 
 int		get_board_height(void)
 {
@@ -99,6 +97,26 @@ void			init_board(t_filler_context *context)
 	context->board[i] = NULL;
 }
 
+void				get_player(t_filler_context *context)
+{
+	int	row;
+	int	col;
+
+	row = 0;
+	context->player = NULL;
+	while (row < context->board_height)
+	{
+		col = 0;
+		while (col < context->board_width)
+		{
+			if ((context->board)[row][col] == context->player_char)
+				append_piece(&context->player, row, col);
+			col++;
+		}
+		row++;
+	}
+}
+
 t_filler_context	init_game_context(void)
 {
 	t_filler_context	filler_context;
@@ -113,5 +131,7 @@ t_filler_context	init_game_context(void)
 	filler_context.board_width = get_board_width();
 	init_board(&filler_context);
 	update_board(&filler_context);
+	filler_context.heatmap = create_heatamp(filler_context.board_height, filler_context.board_width);
+	update_heatmap(&filler_context);
 	return (filler_context);
 }

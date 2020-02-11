@@ -6,7 +6,7 @@
 #    By: kmira <kmira@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/07 02:00:29 by kmira             #+#    #+#              #
-#    Updated: 2020/02/10 13:14:41 by kmira            ###   ########.fr        #
+#    Updated: 2020/02/10 20:28:59 by kmira            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,10 @@ LIBFT = srcs/libft/libft.a
 
 FILES = \
 	debug \
+	get_piece \
 	heatmap_color \
+	heatmap_display \
+	heatmap \
 	update_game_state \
 	initialize_game \
 	main \
@@ -58,5 +61,8 @@ save: fclean
 
 play:
 	./filler_vm -p1 resources/players/$(NAME) -f resources/maps/map00
+
+map:
+	./filler_vm -p1 resources/players/$(NAME) -f resources/maps/$(MAP)
 
 .PHONY: all clean fclean re quick save
