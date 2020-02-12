@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 01:55:57 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/12 10:05:31 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/12 14:31:53 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,6 @@ int	main(void)
 		print_heatmap(&context);
 		piece = new_piece_to_be_place();
 		place_piece(&context, piece);
-
-		free_piece(piece);
-		debug_out_str("Just freed the piece, going to wait a bit and see");
 
 		ft_bzero(buff, sizeof(buff));
 		read(STDIN_FILENO, buff, 8);

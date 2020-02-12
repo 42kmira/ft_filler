@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 05:47:45 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/12 10:03:14 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/12 13:41:56 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,13 @@ int		get_board_height(void)
 	result = -1;
 	ft_bzero(number, sizeof(number));
 	read(STDIN_FILENO, &number[i], 1);
-	debug_out_str("Begin");
 	while (i < DIGIT_LEN && number[i] != ' ')
 	{
 		i++;
 		read(STDIN_FILENO, &number[i], 1);
 	}
-	debug_out_str("End");
 	number[i] = '\0';
 	result = ft_atoi(number);
-	debug_out_str(number);
 	return (result);
 }
 
@@ -83,7 +80,6 @@ int		get_board_width(void)
 	}
 	number[i] = '\0';
 	result = ft_atoi(number);
-	debug_out_str(number);
 	return (result);
 }
 

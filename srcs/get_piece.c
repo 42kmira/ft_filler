@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:29:02 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/12 09:54:47 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/12 15:23:41 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,11 +139,60 @@ void	place_piece(t_filler_context *context, t_piece *piece)
 {
 	int		row_loc;
 	int		col_loc;
+	t_piece	*spot;
+	t_piece	*iter;
+	int		valid;
+	int		row;
+	int		col;
 
-	row_loc = context->player->row_origin - (piece->next)->row_rel;
-	col_loc = context->player->col_origin - (piece->next)->col_rel;
+	spot = context->player;
+	while (spot != NULL)
+	{
+		valid = 1;
+		//first is 0 0 0 0, second is piece of intersect and
+		//last is where verification starts.
+		iter = piece->next->next;
+		while (iter != NULL)
+		{
+			row = spot->row_rel + (iter->row_rel - piece->next->row_rel);
+			col = spot->col_rel + (iter->col_rel - piece->next->col_rel);
+			if (context->board_height < row || context->board_width <= col ||
+				row < 0 || col < 0 || (context->board)[row][col] == 'O' || (context->board)[row][col] == 'X')
+			{
+				dprintf(debug_fd(DEBUG_GET, 0), "SPOT (%d, %d) and PIECE (%d, %d)\n", spot->row_rel, spot->col_rel, iter->row_rel, iter->col_rel);
+				valid = 0;
+				break ;
+			}
+			iter = iter->next;
+		}
+		if (valid == 1)
+			break ;
+		spot = spot->next;
+	}
+	dprintf(debug_fd(DEBUG_GET, 0), "USING ROW: %d COL: %d\n", spot->row_rel, spot->col_rel);
+	row_loc = spot->row_rel - (piece->next)->row_rel;
+	col_loc = spot->col_rel - (piece->next)->col_rel;
 	ft_putnbr_fd(row_loc, 1);
 	ft_putchar_fd(' ', 1);
 	ft_putnbr_fd(col_loc, 1);
 	ft_putchar_fd('\n', 1);
+
+	int	row_offset;
+	int	col_offset;
+
+	row_offset = spot->row_rel - (piece->next)->row_rel;
+	col_offset = spot->col_rel - (piece->next)->col_rel;
+	iter = piece->next->next;
+	while (iter != NULL)
+	{
+		iter->row_rel += row_offset;
+		iter->col_rel += col_offset;
+		dprintf(debug_fd(DEBUG_GET, 0), "ROW: %d COL: %d\n", iter->row_rel, iter->col_rel);
+		iter = iter->next;
+	}
+	iter = context->player;
+	while (iter->next != NULL)
+		iter = iter->next;
+	iter->next = piece->next->next;
 }
+
