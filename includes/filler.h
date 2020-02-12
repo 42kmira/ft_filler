@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 01:56:57 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/10 21:46:56 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/12 09:35:05 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,16 @@
 
 # include "debug.h"
 
-# define P1 'O'
-# define P2 'X'
+# define P1 'o'
+# define P2 'x'
 
 #define DIGIT_LEN 20
 
 t_filler_context	init_game_context(void);
 void				update_board(t_filler_context *context);
+void				move_stdin_ptr_to_board_size(void);
+int					get_board_height(void);
+int					get_board_width(void);
 
 /*
 ** -_---_-_-  -_---_-_-  -_---_-_-  -_---_-_-  -_---_-_-  -_---_-_-  -_---_-_-
@@ -61,7 +64,9 @@ void	fill_heat_map(int **heat_map, int height, int width, int current);
 ** FILES: get_piece.c
 */
 
+t_piece	*new_piece_to_be_place(void);
 void	append_piece(t_piece **piece_head, int row, int col);
-t_piece	*new_piece_to_be_place(t_filler_context *context);
+void	place_piece(t_filler_context *context, t_piece *piece);
+void	free_piece(t_piece *piece);
 
 #endif

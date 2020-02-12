@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:29:02 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/10 22:00:45 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/12 09:54:47 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,7 @@ void	append_piece(t_piece **piece_head, int row, int col)
 	t_piece	*iter;
 
 	if (*piece_head == NULL)
-	{
 		*piece_head = make_piece(row, col, row, col);
-	}
 	else
 	{
 		iter = *piece_head;
@@ -60,17 +58,33 @@ char	**get_piece_board(int piece_height, int piece_width)
 	result = malloc(sizeof(*result) * (piece_height + 1));
 	while (row < piece_height)
 	{
-		result[row] = malloc(sizeof(**result) * (piece_width + 1));
-		read(STDIN_FILENO, result[row], piece_width + 1);
-		result[row][piece_width + 1] = '\0';
-		debug_out_str(result[row]);
+		result[row] = malloc(sizeof(**result) * (piece_width + 10));
+		ft_bzero(result[row], sizeof(**result) * (piece_width + 10));
+		read(STDIN_FILENO, result[row], 1);
+		read(STDIN_FILENO, result[row], piece_width);
+		result[row][piece_width] = '\0';
 		row++;
 	}
 	result[row] = NULL;
+	read(STDIN_FILENO, &row, 1);
 	return (result);
 }
 
-t_piece	*new_piece_to_be_place(t_filler_context *context)
+void	free_piece(t_piece *piece)
+{
+	t_piece	*iter;
+	t_piece	*release;
+
+	iter = piece;
+	while (iter != NULL)
+	{
+		release = iter;
+		iter = iter->next;
+		free(release);
+	}
+}
+
+t_piece	*new_piece_to_be_place(void)
 {
 	int		i;
 	int		piece_height;
@@ -86,7 +100,6 @@ t_piece	*new_piece_to_be_place(t_filler_context *context)
 		read(STDIN_FILENO, &buff[i], 1);
 	}
 	buff[i] = '\0';
-	debug_out_str(buff);
 	piece_height = ft_atoi(buff);
 
 	i = 0;
@@ -97,10 +110,40 @@ t_piece	*new_piece_to_be_place(t_filler_context *context)
 		read(STDIN_FILENO, &buff[i], 1);
 	}
 	buff[i] = '\0';
-	debug_out_str(buff);
 	piece_width = ft_atoi(buff);
 
-	get_piece_board(piece_height, piece_width);
-	(void)context;
-	return (NULL);
+	char **piece_board;
+
+	piece_board = get_piece_board(piece_height, piece_width);
+	t_piece	*piece;
+	int	row;
+	int	col;
+
+	row = 0;
+	piece = make_piece(0, 0, 0, 0);
+	while (row < piece_height)
+	{
+		col = 0;
+		while (col < piece_width)
+		{
+			if ((piece_board)[row][col] == '*')
+				append_piece(&piece, row, col);
+			col++;
+		}
+		row++;
+	}
+	return (piece);
+}
+
+void	place_piece(t_filler_context *context, t_piece *piece)
+{
+	int		row_loc;
+	int		col_loc;
+
+	row_loc = context->player->row_origin - (piece->next)->row_rel;
+	col_loc = context->player->col_origin - (piece->next)->col_rel;
+	ft_putnbr_fd(row_loc, 1);
+	ft_putchar_fd(' ', 1);
+	ft_putnbr_fd(col_loc, 1);
+	ft_putchar_fd('\n', 1);
 }
