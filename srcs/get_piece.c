@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:29:02 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/12 15:23:41 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/16 01:28:19 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ void	place_piece(t_filler_context *context, t_piece *piece)
 	int		col_loc;
 	t_piece	*spot;
 	t_piece	*iter;
+	t_piece	*piece_place;
 	int		valid;
 	int		row;
 	int		col;
@@ -148,30 +149,57 @@ void	place_piece(t_filler_context *context, t_piece *piece)
 	spot = context->player;
 	while (spot != NULL)
 	{
-		valid = 1;
 		//first is 0 0 0 0, second is piece of intersect and
 		//last is where verification starts.
-		iter = piece->next->next;
-		while (iter != NULL)
+		piece_place = piece->next;
+		while (piece_place != NULL)
 		{
-			row = spot->row_rel + (iter->row_rel - piece->next->row_rel);
-			col = spot->col_rel + (iter->col_rel - piece->next->col_rel);
-			if (context->board_height < row || context->board_width <= col ||
-				row < 0 || col < 0 || (context->board)[row][col] == 'O' || (context->board)[row][col] == 'X')
+			valid = 1;
+			iter = piece->next;
+			while (iter != NULL)
 			{
-				dprintf(debug_fd(DEBUG_GET, 0), "SPOT (%d, %d) and PIECE (%d, %d)\n", spot->row_rel, spot->col_rel, iter->row_rel, iter->col_rel);
-				valid = 0;
-				break ;
+				row = spot->row_rel + (iter->row_rel - piece_place->row_rel);
+				col = spot->col_rel + (iter->col_rel - piece_place->col_rel);
+				if (iter == piece_place)
+				{
+					if (row >= 0 && col >= 0 &&
+					context->board_height >= row && context->board_width >= col &&
+					ft_tolower((context->board)[row][col]) == context->player_char)
+					{
+						iter = iter->next;
+						continue ;
+					}
+					else
+					{
+						valid = 0;
+						break ;
+					}
+				}
+				dprintf(debug_fd(DEBUG_GET, 0), "HERE\n");
+				if (context->board_height < row || context->board_width < col ||
+					row < 0 || col < 0 ||
+					(context->board)[row][col] == 'O' || (context->board)[row][col] == 'X')
+				{
+					// dprintf(debug_fd(DEBUG_GET, 0), "SPOT (%d, %d) and PIECE (%d, %d)\n", spot->row_rel, spot->col_rel, iter->row_rel, iter->col_rel);
+					valid = 0;
+					dprintf(debug_fd(DEBUG_GET, 0), "END\n");
+					break ;
+				}
+				dprintf(debug_fd(DEBUG_GET, 0), "END\n");
+				iter = iter->next;
 			}
-			iter = iter->next;
+			if (valid == 1)
+				break ;
+			piece_place = piece_place->next;
 		}
 		if (valid == 1)
 			break ;
 		spot = spot->next;
 	}
+
 	dprintf(debug_fd(DEBUG_GET, 0), "USING ROW: %d COL: %d\n", spot->row_rel, spot->col_rel);
-	row_loc = spot->row_rel - (piece->next)->row_rel;
-	col_loc = spot->col_rel - (piece->next)->col_rel;
+	row_loc = spot->row_rel - (piece_place)->row_rel;
+	col_loc = spot->col_rel - (piece_place)->col_rel;
 	ft_putnbr_fd(row_loc, 1);
 	ft_putchar_fd(' ', 1);
 	ft_putnbr_fd(col_loc, 1);
@@ -180,9 +208,9 @@ void	place_piece(t_filler_context *context, t_piece *piece)
 	int	row_offset;
 	int	col_offset;
 
-	row_offset = spot->row_rel - (piece->next)->row_rel;
-	col_offset = spot->col_rel - (piece->next)->col_rel;
-	iter = piece->next->next;
+	row_offset = spot->row_rel - (piece_place)->row_rel;
+	col_offset = spot->col_rel - (piece_place)->col_rel;
+	iter = piece->next;
 	while (iter != NULL)
 	{
 		iter->row_rel += row_offset;
@@ -190,9 +218,21 @@ void	place_piece(t_filler_context *context, t_piece *piece)
 		dprintf(debug_fd(DEBUG_GET, 0), "ROW: %d COL: %d\n", iter->row_rel, iter->col_rel);
 		iter = iter->next;
 	}
-	iter = context->player;
-	while (iter->next != NULL)
-		iter = iter->next;
-	iter->next = piece->next->next;
+	iter = piece->next;
+	spot = context->player;
+	while (spot->next != NULL)
+		spot = spot->next;
+	while (iter != NULL)
+	{
+		if (iter == piece_place)
+			iter = iter->next;
+		spot->next = iter;
+
+		if (iter != NULL)
+		{
+			spot = spot->next;
+			iter = iter->next;
+		}
+	}
 }
 
