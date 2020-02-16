@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:29:02 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/16 01:28:19 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/16 01:39:10 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,8 +175,8 @@ void	place_piece(t_filler_context *context, t_piece *piece)
 						break ;
 					}
 				}
-				dprintf(debug_fd(DEBUG_GET, 0), "HERE\n");
-				if (context->board_height < row || context->board_width < col ||
+				dprintf(debug_fd(DEBUG_GET, 0), "HERE %d, %d\n", row, col);
+				if (context->board_height <= row || context->board_width <= col ||
 					row < 0 || col < 0 ||
 					(context->board)[row][col] == 'O' || (context->board)[row][col] == 'X')
 				{
