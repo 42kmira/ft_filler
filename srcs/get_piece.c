@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:29:02 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/16 01:39:10 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/16 19:10:20 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,8 +137,6 @@ t_piece	*new_piece_to_be_place(void)
 
 void	place_piece(t_filler_context *context, t_piece *piece)
 {
-	int		row_loc;
-	int		col_loc;
 	t_piece	*spot;
 	t_piece	*iter;
 	t_piece	*piece_place;
@@ -156,36 +154,12 @@ void	place_piece(t_filler_context *context, t_piece *piece)
 		{
 			valid = 1;
 			iter = piece->next;
-			while (iter != NULL)
+			while (iter != NULL && valid == 1)
 			{
 				row = spot->row_rel + (iter->row_rel - piece_place->row_rel);
 				col = spot->col_rel + (iter->col_rel - piece_place->col_rel);
-				if (iter == piece_place)
-				{
-					if (row >= 0 && col >= 0 &&
-					context->board_height >= row && context->board_width >= col &&
-					ft_tolower((context->board)[row][col]) == context->player_char)
-					{
-						iter = iter->next;
-						continue ;
-					}
-					else
-					{
-						valid = 0;
-						break ;
-					}
-				}
-				dprintf(debug_fd(DEBUG_GET, 0), "HERE %d, %d\n", row, col);
-				if (context->board_height <= row || context->board_width <= col ||
-					row < 0 || col < 0 ||
-					(context->board)[row][col] == 'O' || (context->board)[row][col] == 'X')
-				{
-					// dprintf(debug_fd(DEBUG_GET, 0), "SPOT (%d, %d) and PIECE (%d, %d)\n", spot->row_rel, spot->col_rel, iter->row_rel, iter->col_rel);
+				if (iter != piece_place && is_valid_placement(row, col, context) == 0)
 					valid = 0;
-					dprintf(debug_fd(DEBUG_GET, 0), "END\n");
-					break ;
-				}
-				dprintf(debug_fd(DEBUG_GET, 0), "END\n");
 				iter = iter->next;
 			}
 			if (valid == 1)
@@ -197,16 +171,13 @@ void	place_piece(t_filler_context *context, t_piece *piece)
 		spot = spot->next;
 	}
 
-	dprintf(debug_fd(DEBUG_GET, 0), "USING ROW: %d COL: %d\n", spot->row_rel, spot->col_rel);
-	row_loc = spot->row_rel - (piece_place)->row_rel;
-	col_loc = spot->col_rel - (piece_place)->col_rel;
-	ft_putnbr_fd(row_loc, 1);
+	ft_putnbr_fd(spot->row_rel - (piece_place)->row_rel, 1);
 	ft_putchar_fd(' ', 1);
-	ft_putnbr_fd(col_loc, 1);
+	ft_putnbr_fd(spot->col_rel - (piece_place)->col_rel, 1);
 	ft_putchar_fd('\n', 1);
 
-	int	row_offset;
-	int	col_offset;
+	int		row_offset;
+	int		col_offset;
 
 	row_offset = spot->row_rel - (piece_place)->row_rel;
 	col_offset = spot->col_rel - (piece_place)->col_rel;

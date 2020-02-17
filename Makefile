@@ -6,7 +6,7 @@
 #    By: kmira <kmira@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/07 02:00:29 by kmira             #+#    #+#              #
-#    Updated: 2020/02/15 23:32:11 by kmira            ###   ########.fr        #
+#    Updated: 2020/02/16 19:03:56 by kmira            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,10 @@ FILES = \
 	heatmap_color \
 	heatmap_display \
 	heatmap \
-	update_game_state \
 	initialize_game \
 	main \
+	update_game_state \
+	verify_piece \
 
 SRCS = $(addsuffix .c, $(addprefix srcs/, $(FILES)))
 
