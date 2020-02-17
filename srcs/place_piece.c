@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 20:38:00 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/16 20:40:36 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/17 00:40:12 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,15 @@ void	place_piece(t_filler_context *context, t_piece *piece)
 	int		row;
 	int		col;
 
+	t_piece	*max_spot;
+	t_piece	*max_piece_place;
+	int		curr_sum;
+	int		max_sum;
+
+	max_spot = NULL;
+	max_piece_place = NULL;
+	max_sum = -2147483648;
+
 	spot = context->player;
 	while (spot != NULL)
 	{
@@ -30,6 +39,7 @@ void	place_piece(t_filler_context *context, t_piece *piece)
 		while (piece_place != NULL)
 		{
 			valid = 1;
+			curr_sum = 0;
 			iter = piece->next;
 			while (iter != NULL && valid == 1)
 			{
@@ -37,27 +47,31 @@ void	place_piece(t_filler_context *context, t_piece *piece)
 				col = spot->col_rel + (iter->col_rel - piece_place->col_rel);
 				if (iter != piece_place && is_valid_placement(row, col, context) == 0)
 					valid = 0;
+				else
+					curr_sum += (context->heatmap)[row][col];
 				iter = iter->next;
 			}
-			if (valid == 1)
-				break ;
+			if (valid == 1 && max_sum <= curr_sum)
+			{
+				max_sum = curr_sum;
+				max_spot = spot;
+				max_piece_place = piece_place;
+			}
 			piece_place = piece_place->next;
 		}
-		if (valid == 1)
-			break ;
 		spot = spot->next;
 	}
 
-	ft_putnbr_fd(spot->row_rel - (piece_place)->row_rel, 1);
+	ft_putnbr_fd(max_spot->row_rel - (max_piece_place)->row_rel, 1);
 	ft_putchar_fd(' ', 1);
-	ft_putnbr_fd(spot->col_rel - (piece_place)->col_rel, 1);
+	ft_putnbr_fd(max_spot->col_rel - (max_piece_place)->col_rel, 1);
 	ft_putchar_fd('\n', 1);
 
 	int		row_offset;
 	int		col_offset;
 
-	row_offset = spot->row_rel - (piece_place)->row_rel;
-	col_offset = spot->col_rel - (piece_place)->col_rel;
+	row_offset = max_spot->row_rel - (max_piece_place)->row_rel;
+	col_offset = max_spot->col_rel - (max_piece_place)->col_rel;
 	iter = piece->next;
 	while (iter != NULL)
 	{
@@ -72,7 +86,7 @@ void	place_piece(t_filler_context *context, t_piece *piece)
 		spot = spot->next;
 	while (iter != NULL)
 	{
-		if (iter == piece_place)
+		if (iter == max_piece_place)
 			iter = iter->next;
 		spot->next = iter;
 
