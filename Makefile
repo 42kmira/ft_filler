@@ -6,7 +6,7 @@
 #    By: kmira <kmira@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/07 02:00:29 by kmira             #+#    #+#              #
-#    Updated: 2020/02/16 19:03:56 by kmira            ###   ########.fr        #
+#    Updated: 2020/02/16 20:40:56 by kmira            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ FILES = \
 	heatmap \
 	initialize_game \
 	main \
+	place_piece \
 	update_game_state \
 	verify_piece \
 
