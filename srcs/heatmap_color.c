@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 13:14:04 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/10 20:22:33 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/17 17:09:57 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int		get_red(int num, int max)
 	double	h;
 	int		c;
 
-	c = 5 * max;
-	h = max * .85;
+	c = max;
+	h = max * .88;
 	red = 250 * powf(M_E, -1 * powf(num - h, 2) / (c));
 	return ((int)red);
 }
@@ -31,8 +31,8 @@ int		get_blue(int num, int max)
 	double	h;
 	int		c;
 
-	c = 5 * max;
-	h = max * .15;
+	c = max * .6;
+	h = max * .7;
 	blue = 250 * powf(M_E, -1 * powf(num - h, 2) / (c));
 	return ((int)blue);
 }
@@ -43,8 +43,8 @@ int		get_green(int num, int max)
 	double	h;
 	int		c;
 
-	c = max;
-	h = max * .5;
+	c = max * .7;
+	h = max * .8;
 	green = 250 * powf(M_E, -1 * powf(num - h, 2) / (c));
 	return ((int)green);
 }

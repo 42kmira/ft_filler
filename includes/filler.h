@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 01:56:57 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/16 19:02:16 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/17 15:26:24 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	fill_heat_map(int **heat_map, int height, int width, int current);
 
 t_piece	*new_piece_to_be_place(void);
 void	append_piece(t_piece **piece_head, int row, int col);
-void	place_piece(t_filler_context *context, t_piece *piece);
+int		place_piece(t_filler_context *context, t_piece *piece);
 void	free_piece(t_piece *piece);
 
 int		is_valid_placement(int row, int col, t_filler_context *context);

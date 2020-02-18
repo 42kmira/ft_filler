@@ -6,7 +6,7 @@
 #    By: kmira <kmira@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/07 02:00:29 by kmira             #+#    #+#              #
-#    Updated: 2020/02/16 20:40:56 by kmira            ###   ########.fr        #
+#    Updated: 2020/02/17 16:58:19 by kmira            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,6 +63,9 @@ save: fclean
 
 play:
 	./filler_vm -p1 resources/players/$(NAME) -f resources/maps/map00
+
+hard:
+	./filler_vm -p1 resources/players/$(NAME) -p2 resources/players/quiet.filler -f resources/maps/map05 > /dev/null
 
 map:
 	./filler_vm -p1 resources/players/$(NAME) -f resources/maps/$(MAP)

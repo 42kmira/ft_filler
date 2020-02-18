@@ -6,13 +6,26 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 20:38:00 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/17 00:40:12 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/17 15:25:58 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-void	place_piece(t_filler_context *context, t_piece *piece)
+void		write_move(t_piece *max_spot, t_piece *max_piece_place)
+{
+	if (max_piece_place != NULL && max_spot != NULL)
+	{
+		ft_putnbr_fd(max_spot->row_rel - (max_piece_place)->row_rel, 1);
+		ft_putchar_fd(' ', 1);
+		ft_putnbr_fd(max_spot->col_rel - (max_piece_place)->col_rel, 1);
+		ft_putchar_fd('\n', 1);
+	}
+	else
+		write(1, "0 0\n", 4);
+}
+
+int		place_piece(t_filler_context *context, t_piece *piece)
 {
 	t_piece	*spot;
 	t_piece	*iter;
@@ -62,10 +75,9 @@ void	place_piece(t_filler_context *context, t_piece *piece)
 		spot = spot->next;
 	}
 
-	ft_putnbr_fd(max_spot->row_rel - (max_piece_place)->row_rel, 1);
-	ft_putchar_fd(' ', 1);
-	ft_putnbr_fd(max_spot->col_rel - (max_piece_place)->col_rel, 1);
-	ft_putchar_fd('\n', 1);
+	write_move(max_spot, max_piece_place);
+	if (max_spot == NULL || max_piece_place == NULL)
+		return (0);
 
 	int		row_offset;
 	int		col_offset;
@@ -96,5 +108,6 @@ void	place_piece(t_filler_context *context, t_piece *piece)
 			iter = iter->next;
 		}
 	}
+	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 01:55:57 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/12 14:31:53 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/17 17:04:06 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,25 @@ int	main(void)
 		update_heatmap(&context);
 		print_heatmap(&context);
 		piece = new_piece_to_be_place();
-		place_piece(&context, piece);
+		keep_playing = place_piece(&context, piece);
 
-		ft_bzero(buff, sizeof(buff));
-		read(STDIN_FILENO, buff, 8);
-		debug_out_str("Header?");
-		debug_out_str(buff);
+		if (keep_playing == 1)
+		{
+			ft_bzero(buff, sizeof(buff));
+			read(STDIN_FILENO, buff, 8);
+			debug_out_str("Header?");
+			debug_out_str(buff);
 
-		get_board_height();
-		get_board_width();
-		update_board(&context);
+			get_board_height();
+			get_board_width();
+			update_board(&context);
+		}
 	}
 	debug_out_str("Ending program");
+	int i;
+
+	i = 0;
+	while (i < 100000000)
+		i++;
 	return (0);
 }
