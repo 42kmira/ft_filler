@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 13:37:38 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/11 19:38:24 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/17 17:31:11 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,33 +29,35 @@ int		**create_heatamp(int height, int width)
 	return (heatmap);
 }
 
-void	fill_heat_map(int **heat_map, int height, int width, int current)
+void	fill_heat_map(int **heat_map, int height, int width, int current, t_filler_context *context)
 {
 	int	row;
 	int	col;
 	int	toggle;
+	char	**board;
 
 	row = -1;
 	toggle = 0;
+	board = context->board;
 	while (++row < height)
 	{
 		col = -1;
 		while (++col < width)
 			if (heat_map[row][col] == current)
 			{
-				if (row - 1 >= 0 && heat_map[row - 1][col] == -1)
+				if (row - 1 >= 0 && heat_map[row - 1][col] == -1 && ft_tolower(board[row - 1][col]) != context->player_char)
 					heat_map[row - 1][col] = current - 1;
-				if (row + 1 < height && heat_map[row + 1][col] == -1)
+				if (row + 1 < height && heat_map[row + 1][col] == -1 && ft_tolower(board[row + 1][col]) != context->player_char)
 					heat_map[row + 1][col] = current - 1;
-				if (col - 1 >= 0 && heat_map[row][col - 1] == -1)
+				if (col - 1 >= 0 && heat_map[row][col - 1] == -1 && ft_tolower(board[row][col - 1]) != context->player_char)
 					heat_map[row][col - 1] = current - 1;
-				if (col + 1 < width && heat_map[row][col + 1] == -1)
+				if (col + 1 < width && heat_map[row][col + 1] == -1 && ft_tolower(board[row][col + 1]) != context->player_char)
 					heat_map[row][col + 1] = current - 1;
 				toggle = 1;
 			}
 	}
 	if (toggle == 1)
-		fill_heat_map(heat_map, height, width, current - 1);
+		fill_heat_map(heat_map, height, width, current - 1, context);
 }
 
 void	update_heatmap(t_filler_context *context)
@@ -83,5 +85,5 @@ void	update_heatmap(t_filler_context *context)
 			else
 				(context->heatmap)[row][col] = -1;
 	}
-	fill_heat_map(context->heatmap, context->board_height, context->board_width, max);
+	fill_heat_map(context->heatmap, context->board_height, context->board_width, max, context);
 }

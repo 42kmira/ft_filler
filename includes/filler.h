@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 01:56:57 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/17 15:26:24 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/17 17:28:09 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	print_heatmap_e(int **heat_map, int height, int width, int max);
 
 int		**create_heatamp(int height, int width);
 void	update_heatmap(t_filler_context *context);
-void	fill_heat_map(int **heat_map, int height, int width, int current);
+void	fill_heat_map(int **heat_map, int height, int width, int current, t_filler_context *context);
 
 /*
 ** -_---_-_-  -_---_-_-  -_---_-_-  -_---_-_-  -_---_-_-  -_---_-_-  -_---_-_-

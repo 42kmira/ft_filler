@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 20:38:00 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/17 15:25:58 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/17 17:50:04 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int		place_piece(t_filler_context *context, t_piece *piece)
 					curr_sum += (context->heatmap)[row][col];
 				iter = iter->next;
 			}
-			if (valid == 1 && max_sum <= curr_sum)
+			if (valid == 1 && max_sum < curr_sum)
 			{
 				max_sum = curr_sum;
 				max_spot = spot;
