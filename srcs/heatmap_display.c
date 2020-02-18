@@ -6,41 +6,13 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 13:30:12 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/17 16:48:07 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/18 15:21:45 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
 #define ANSI_RESET "\033[0m"
-
-void	print_heatmap_e(int **heat_map, int height, int width, int max)
-{
-	int		row;
-	int		col;
-	int		num;
-	char	*color;
-
-	row = 0;
-	max = max / 2;
-	while (row < height)
-	{
-		col = 0;
-		while (col < width)
-		{
-			num = heat_map[row][col] - max;
-			color = color_code(get_red(num, max), get_green(num, max), get_blue(num, max));
-			if (num == max)
-					dprintf(STDERR_FILENO, "\033[1m\033[35m%4c ", 'X');
-			else
-				dprintf(STDERR_FILENO, "%s%4d ", color, heat_map[row][col]);
-			col++;
-		}
-		dprintf(STDERR_FILENO, ANSI_RESET"\n");
-		dprintf(STDERR_FILENO, ANSI_RESET"\n");
-		row++;
-	}
-}
 
 void	print_heatmap(t_filler_context *context)
 {

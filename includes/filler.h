@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 01:56:57 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/17 17:28:09 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/18 15:26:40 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define P1 'o'
 # define P2 'x'
 
-#define DIGIT_LEN 20
+# define DIGIT_LEN 20
 
 t_filler_context	init_game_context(void);
 void				update_board(t_filler_context *context);
@@ -46,29 +46,29 @@ int					get_board_width(void);
 ** FILES: heatmap_color.c heatmap_display.c heatmap.c
 */
 
-int		get_red(int num, int max);
-int		get_blue(int num, int max);
-int		get_green(int num, int max);
+int					get_red(int num, int max);
+int					get_blue(int num, int max);
+int					get_green(int num, int max);
 
-char	*color_code(uint8_t red, uint8_t green, uint8_t blue);
+char				*color_code(uint8_t red, uint8_t green, uint8_t blue);
 
-void	print_heatmap(t_filler_context *context);
-void	print_heatmap_e(int **heat_map, int height, int width, int max);
+void				print_heatmap(t_filler_context *context);
 
-int		**create_heatamp(int height, int width);
-void	update_heatmap(t_filler_context *context);
-void	fill_heat_map(int **heat_map, int height, int width, int current, t_filler_context *context);
+int					**create_heatamp(int height, int width);
+void				update_heatmap(t_filler_context *context);
+void				fill_heat_map(int **heat_map, int height, int width,
+								int current, t_filler_context *context);
 
 /*
 ** -_---_-_-  -_---_-_-  -_---_-_-  -_---_-_-  -_---_-_-  -_---_-_-  -_---_-_-
 ** FILES: get_piece.c
 */
 
-t_piece	*new_piece_to_be_place(void);
-void	append_piece(t_piece **piece_head, int row, int col);
-int		place_piece(t_filler_context *context, t_piece *piece);
-void	free_piece(t_piece *piece);
+t_piece				*new_piece_to_be_place(void);
+void				append_piece(t_piece **piece_head, int row, int col);
+int					place_piece(t_filler_context *context, t_piece *piece);
+void				free_piece(t_piece *piece);
 
-int		is_valid_placement(int row, int col, t_filler_context *context);
+int					valid_placement(int row, int col, t_filler_context *contex);
 
 #endif

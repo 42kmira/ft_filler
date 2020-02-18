@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 20:38:00 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/17 17:50:04 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/18 15:25:56 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		place_piece(t_filler_context *context, t_piece *piece)
 			{
 				row = spot->row_rel + (iter->row_rel - piece_place->row_rel);
 				col = spot->col_rel + (iter->col_rel - piece_place->col_rel);
-				if (iter != piece_place && is_valid_placement(row, col, context) == 0)
+				if (iter != piece_place && valid_placement(row, col, context) == 0)
 					valid = 0;
 				else
 					curr_sum += (context->heatmap)[row][col];

@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 18:44:41 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/16 19:07:39 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/18 15:25:56 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		another_piece_there(int row, int col, char **board)
 	return (result);
 }
 
-int		is_valid_placement(int row, int col, t_filler_context *context)
+int		valid_placement(int row, int col, t_filler_context *context)
 {
 	int		result;
 

@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 13:37:38 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/17 17:31:11 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/17 18:05:38 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int		**create_heatamp(int height, int width)
 	return (heatmap);
 }
 
+#define ZEN -7
+
 void	fill_heat_map(int **heat_map, int height, int width, int current, t_filler_context *context)
 {
 	int	row;
@@ -45,13 +47,13 @@ void	fill_heat_map(int **heat_map, int height, int width, int current, t_filler_
 		while (++col < width)
 			if (heat_map[row][col] == current)
 			{
-				if (row - 1 >= 0 && heat_map[row - 1][col] == -1 && ft_tolower(board[row - 1][col]) != context->player_char)
+				if (row - 1 >= 0 && heat_map[row - 1][col] == ZEN && ft_tolower(board[row - 1][col]) != context->player_char)
 					heat_map[row - 1][col] = current - 1;
-				if (row + 1 < height && heat_map[row + 1][col] == -1 && ft_tolower(board[row + 1][col]) != context->player_char)
+				if (row + 1 < height && heat_map[row + 1][col] == ZEN && ft_tolower(board[row + 1][col]) != context->player_char)
 					heat_map[row + 1][col] = current - 1;
-				if (col - 1 >= 0 && heat_map[row][col - 1] == -1 && ft_tolower(board[row][col - 1]) != context->player_char)
+				if (col - 1 >= 0 && heat_map[row][col - 1] == ZEN && ft_tolower(board[row][col - 1]) != context->player_char)
 					heat_map[row][col - 1] = current - 1;
-				if (col + 1 < width && heat_map[row][col + 1] == -1 && ft_tolower(board[row][col + 1]) != context->player_char)
+				if (col + 1 < width && heat_map[row][col + 1] == ZEN && ft_tolower(board[row][col + 1]) != context->player_char)
 					heat_map[row][col + 1] = current - 1;
 				toggle = 1;
 			}
@@ -83,7 +85,7 @@ void	update_heatmap(t_filler_context *context)
 			if (ft_tolower((context->board)[row][col]) == enemy_char)
 				(context->heatmap)[row][col] = max;
 			else
-				(context->heatmap)[row][col] = -1;
+				(context->heatmap)[row][col] = ZEN;
 	}
 	fill_heat_map(context->heatmap, context->board_height, context->board_width, max, context);
 }
