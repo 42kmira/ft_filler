@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 01:56:57 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/18 22:51:36 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/19 13:22:07 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void				update_board(t_filler_context *context);
 void				move_stdin_ptr_to_board_size(void);
 int					get_board_height(void);
 int					get_board_width(void);
+int					read_num(void);
 
 /*
 ** -_---_-_-  -_---_-_-  -_---_-_-  -_---_-_-  -_---_-_-  -_---_-_-  -_---_-_-

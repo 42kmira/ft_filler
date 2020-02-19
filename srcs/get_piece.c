@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:29:02 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/19 11:32:17 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/19 13:46:26 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,33 +75,13 @@ void	free_piece(t_piece *piece)
 	}
 }
 
-t_piece	*new_piece_to_place(void)
+t_piece		*fill_piece(char **piece_board, int piece_height,
+							int piece_width, t_piece *piece)
 {
-	int		i;
-	int		piece_height;
-	int		piece_width;
-	char	buff[DIGIT_LEN];
-	char	**piece_board;
 	int		row;
 	int		col;
 	t_piece	*piece;
 
-	read(STDIN_FILENO, buff, PIECE_);
-	i = 0;
-	while (read(STDIN_FILENO, &buff[i], 1) && buff[i] != ' ')
-		i++;
-	buff[i] = '\0';
-	piece_height = ft_atoi(buff);
-	i = 0;
-	read(STDIN_FILENO, buff, 1);
-	while (buff[i] != ':')
-	{
-		i++;
-		read(STDIN_FILENO, &buff[i], 1);
-	}
-	buff[i] = '\0';
-	piece_width = ft_atoi(buff);
-	piece_board = get_piece_board(piece_height, piece_width);
 	row = 0;
 	piece = make_piece(0, 0);
 	while (row < piece_height)
@@ -115,5 +95,21 @@ t_piece	*new_piece_to_place(void)
 		}
 		row++;
 	}
+	return (piece);
+}
+
+t_piece	*new_piece_to_place(void)
+{
+	int		piece_height;
+	int		piece_width;
+	char	**piece_board;
+	char	buff[DIGIT_LEN];
+	t_piece	*piece;
+
+	read(STDIN_FILENO, buff, PIECE_);
+	piece_height = read_num();
+	piece_width = read_num();
+	piece_board = get_piece_board(piece_height, piece_width);
+	piece = fill_piece(piece_board, piece_height, piece_width, piece);
 	return (piece);
 }
