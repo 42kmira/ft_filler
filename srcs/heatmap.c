@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 13:37:38 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/18 22:16:14 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/19 11:40:08 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		**create_heatamp(int height, int width)
 	return (heatmap);
 }
 
-#define UNFILLED -7
+#define UNFILLED -1
 
 void	update_spot(int row, int col, int current, t_filler_context *context)
 {
