@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 01:56:57 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/18 16:52:01 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/18 22:11:10 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void				print_heatmap(t_filler_context *context);
 
 int					**create_heatamp(int height, int width);
 void				update_heatmap(t_filler_context *context);
-void				fill_heat_map(int **heat_map, int height, int width,
-								int current, t_filler_context *context);
+void				fill_heat_map(int **heat_map, int current,
+									t_filler_context *context);
 
 /*
 ** -_---_-_-  -_---_-_-  -_---_-_-  -_---_-_-  -_---_-_-  -_---_-_-  -_---_-_-
@@ -70,5 +70,6 @@ int					place_piece(t_filler_context *context, t_piece *piece);
 void				free_piece(t_piece *piece);
 
 int					valid_placement(int row, int col, t_filler_context *contex);
+int					out_out_bounds(int row, int col, t_filler_context *context);
 
 #endif
