@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 05:40:56 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/18 15:19:55 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/18 15:42:04 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 typedef	struct	s_filler_piece
 {
-	int						row_origin;
-	int						col_origin;
-
 	int						row_rel;
 	int						col_rel;
 

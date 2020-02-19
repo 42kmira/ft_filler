@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 01:55:57 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/17 17:40:10 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/18 16:52:01 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,33 +21,20 @@ int	main(void)
 
 	init_debug();
 	context = init_game_context();
-
 	keep_playing = 1;
-
 	while (keep_playing)
 	{
 		update_heatmap(&context);
 		print_heatmap(&context);
-		piece = new_piece_to_be_place();
+		piece = new_piece_to_place();
 		keep_playing = place_piece(&context, piece);
-
 		if (keep_playing == 1)
 		{
 			ft_bzero(buff, sizeof(buff));
 			read(STDIN_FILENO, buff, 8);
-			debug_out_str("Header?");
-			debug_out_str(buff);
-
 			get_board_height();
 			get_board_width();
 			update_board(&context);
 		}
 	}
-	debug_out_str("Ending program");
-	int i;
-
-	i = 0;
-	while (i < 100000000)
-		i++;
-	return (0);
 }

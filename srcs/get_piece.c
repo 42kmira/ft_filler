@@ -6,44 +6,35 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:29:02 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/16 20:40:47 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/18 16:52:43 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-t_piece	*make_piece(int row_origin, int col_origin, int row, int col)
+t_piece	*make_piece(int row, int col)
 {
 	t_piece	*result;
 
 	result = malloc(sizeof(*result));
-	result->row_origin = row_origin;
-	result->col_origin = col_origin;
-
 	result->row_rel = row;
 	result->col_rel = col;
-
 	result->next = NULL;
-
 	return (result);
 }
 
 void	append_piece(t_piece **piece_head, int row, int col)
 {
-	int		row_origin;
-	int		col_origin;
 	t_piece	*iter;
 
 	if (*piece_head == NULL)
-		*piece_head = make_piece(row, col, row, col);
+		*piece_head = make_piece(row, col);
 	else
 	{
 		iter = *piece_head;
-		row_origin = iter->row_origin;
-		col_origin = iter->col_origin;
 		while (iter->next != NULL)
 			iter = iter->next;
-		iter->next = make_piece(row_origin, col_origin, row, col);
+		iter->next = make_piece(row, col);
 	}
 }
 
@@ -84,24 +75,23 @@ void	free_piece(t_piece *piece)
 	}
 }
 
-t_piece	*new_piece_to_be_place(void)
+t_piece	*new_piece_to_place(void)
 {
 	int		i;
 	int		piece_height;
 	int		piece_width;
 	char	buff[DIGIT_LEN];
+	char	**piece_board;
+	int		row;
+	int		col;
+	t_piece	*piece;
 
 	read(STDIN_FILENO, buff, PIECE_);
-	read(STDIN_FILENO, buff, 1);
 	i = 0;
-	while (buff[i] != ' ')
-	{
+	while (read(STDIN_FILENO, &buff[i], 1) && buff[i] != ' ')
 		i++;
-		read(STDIN_FILENO, &buff[i], 1);
-	}
 	buff[i] = '\0';
 	piece_height = ft_atoi(buff);
-
 	i = 0;
 	read(STDIN_FILENO, buff, 1);
 	while (buff[i] != ':')
@@ -111,16 +101,9 @@ t_piece	*new_piece_to_be_place(void)
 	}
 	buff[i] = '\0';
 	piece_width = ft_atoi(buff);
-
-	char **piece_board;
-
 	piece_board = get_piece_board(piece_height, piece_width);
-	t_piece	*piece;
-	int	row;
-	int	col;
-
 	row = 0;
-	piece = make_piece(0, 0, 0, 0);
+	piece = make_piece(0, 0);
 	while (row < piece_height)
 	{
 		col = 0;
