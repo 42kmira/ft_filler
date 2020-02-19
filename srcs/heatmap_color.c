@@ -6,14 +6,14 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 13:14:04 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/17 17:09:57 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/18 22:51:45 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "filler.h"
 
-int		get_red(int num, int max)
+int		get_r(int num, int max)
 {
 	double	red;
 	double	h;
@@ -25,7 +25,7 @@ int		get_red(int num, int max)
 	return ((int)red);
 }
 
-int		get_blue(int num, int max)
+int		get_b(int num, int max)
 {
 	double	blue;
 	double	h;
@@ -37,7 +37,7 @@ int		get_blue(int num, int max)
 	return ((int)blue);
 }
 
-int		get_green(int num, int max)
+int		get_g(int num, int max)
 {
 	double	green;
 	double	h;
@@ -49,7 +49,7 @@ int		get_green(int num, int max)
 	return ((int)green);
 }
 
-char	*color_code(uint8_t red, uint8_t green, uint8_t blue)
+char	*colour_code(uint8_t red, uint8_t green, uint8_t blue)
 {
 	char	*result;
 

@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 01:56:57 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/18 22:11:10 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/18 22:51:36 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ int					get_board_width(void);
 ** FILES: heatmap_color.c heatmap_display.c heatmap.c
 */
 
-int					get_red(int num, int max);
-int					get_blue(int num, int max);
-int					get_green(int num, int max);
+int					get_r(int num, int max);
+int					get_b(int num, int max);
+int					get_g(int num, int max);
 
-char				*color_code(uint8_t red, uint8_t green, uint8_t blue);
+char				*colour_code(uint8_t red, uint8_t green, uint8_t blue);
 
 void				print_heatmap(t_filler_context *context);
 

@@ -6,7 +6,7 @@
 #    By: kmira <kmira@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/07 02:00:29 by kmira             #+#    #+#              #
-#    Updated: 2020/02/17 17:46:34 by kmira            ###   ########.fr        #
+#    Updated: 2020/02/18 22:52:07 by kmira            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ re: fclean all
 
 quick: re
 	make clean
-	mv $(NAME) resources/players/
+	mv $(NAME) resource/players/
 
 save: fclean
 	git add .
@@ -62,12 +62,12 @@ save: fclean
 	git push https://github.com/MrColour/filler.git
 
 play:
-	./filler_vm -p1 resources/players/$(NAME) -f resources/maps/map00
+	./filler_vm -p1 resource/players/$(NAME) -f resource/maps/map00
 
 hard:
-	./filler_vm -p1 resources/players/$(NAME) -p2 resources/players/quiet.filler -f resources/maps/map05 > /dev/null
+	./filler_vm -p1 resource/players/$(NAME) -p2 resource/players/quiet.filler -f resource/maps/map05 > /dev/null
 
 map:
-	./filler_vm -p1 resources/players/$(NAME) -f resources/maps/$(MAP)
+	./filler_vm -p1 resource/players/$(NAME) -f resource/maps/$(MAP)
 
 .PHONY: all clean fclean re quick save
