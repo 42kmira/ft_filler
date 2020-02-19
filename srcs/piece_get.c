@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_piece.c                                        :+:      :+:    :+:   */
+/*   piece_get.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:29:02 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/19 13:46:26 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/19 15:15:26 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,11 @@ void	free_piece(t_piece *piece)
 	}
 }
 
-t_piece		*fill_piece(char **piece_board, int piece_height,
-							int piece_width, t_piece *piece)
+void	fill_piece(char **piece_board, int piece_height,
+					int piece_width, t_piece *piece)
 {
 	int		row;
 	int		col;
-	t_piece	*piece;
 
 	row = 0;
 	piece = make_piece(0, 0);
@@ -95,7 +94,6 @@ t_piece		*fill_piece(char **piece_board, int piece_height,
 		}
 		row++;
 	}
-	return (piece);
 }
 
 t_piece	*new_piece_to_place(void)
@@ -106,10 +104,11 @@ t_piece	*new_piece_to_place(void)
 	char	buff[DIGIT_LEN];
 	t_piece	*piece;
 
+	piece = NULL;
 	read(STDIN_FILENO, buff, PIECE_);
 	piece_height = read_num();
 	piece_width = read_num();
 	piece_board = get_piece_board(piece_height, piece_width);
-	piece = fill_piece(piece_board, piece_height, piece_width, piece);
+	fill_piece(piece_board, piece_height, piece_width, piece);
 	return (piece);
 }

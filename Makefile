@@ -6,7 +6,7 @@
 #    By: kmira <kmira@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/07 02:00:29 by kmira             #+#    #+#              #
-#    Updated: 2020/02/19 10:56:46 by kmira            ###   ########.fr        #
+#    Updated: 2020/02/19 15:03:04 by kmira            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,13 +18,13 @@ LIBFT = srcs/libft/libft.a
 
 FILES = \
 	debug \
-	get_piece \
 	heatmap_color \
 	heatmap_display \
 	heatmap \
 	initialize_game \
 	main \
-	place_piece \
+	piece_place \
+	piece_get \
 	stdin_ptr_move \
 	update_game_state \
 	verify_piece \
