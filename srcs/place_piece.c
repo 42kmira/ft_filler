@@ -6,13 +6,13 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 20:38:00 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/18 16:39:07 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/19 10:59:36 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-void		write_move(t_piece *max_spot, t_piece *max_piece_place)
+void	write_move(t_piece *max_spot, t_piece *max_piece_place)
 {
 	if (max_piece_place != NULL && max_spot != NULL)
 	{
@@ -46,8 +46,8 @@ int		place_piece(t_filler_context *context, t_piece *piece)
 	spot = context->player;
 	while (spot != NULL)
 	{
-		//first is 0 0 0 0, second is piece of intersect and
-		//last is where verification starts.
+// first is 0 0 0 0, second is piece of intersect and
+// last is where verification starts.
 		piece_place = piece->next;
 		while (piece_place != NULL)
 		{
@@ -100,7 +100,6 @@ int		place_piece(t_filler_context *context, t_piece *piece)
 		if (iter == max_piece_place)
 			iter = iter->next;
 		spot->next = iter;
-
 		if (iter != NULL)
 		{
 			spot = spot->next;
@@ -109,4 +108,3 @@ int		place_piece(t_filler_context *context, t_piece *piece)
 	}
 	return (1);
 }
-

@@ -6,14 +6,11 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 13:30:12 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/18 22:59:49 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/18 23:15:39 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
-
-#define ANSI_RESET "\033[0m"
-#define RED "\033[31m"
 
 void	print_heatmap_spot(t_filler_context *context,
 							int row, int col, char *color)

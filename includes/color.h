@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/22 23:30:50 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/10 20:03:26 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/18 23:14:06 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,7 @@
 # define PURPLE				"\033[38;5;201m"
 # define BOLDPURPLE			"\033[1m\033[38;5;201m"
 # define COLOR_RESET		"\033[0m"
+
+# define ANSI_RESET			"\033[0m"
 
 #endif

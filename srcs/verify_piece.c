@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 18:44:41 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/18 21:53:48 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/19 11:01:47 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,3 @@ int		valid_placement(int row, int col, t_filler_context *context)
 		result = 0;
 	return (result);
 }
-
-
