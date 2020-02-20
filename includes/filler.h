@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 01:56:57 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/19 13:22:07 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/20 13:41:54 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,6 @@ void				free_piece(t_piece *piece);
 
 int					valid_placement(int row, int col, t_filler_context *contex);
 int					out_out_bounds(int row, int col, t_filler_context *context);
+int					get_sum(t_piece *root, t_filler_context *context, t_piece *piece_place, t_piece *spot);
 
 #endif

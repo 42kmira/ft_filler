@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 01:55:57 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/20 11:28:45 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/20 12:58:13 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	main(void)
 	keep_playing = 1;
 	while (keep_playing)
 	{
+		debug_out_str("START\n");
 		update_heatmap(&context);
 		print_heatmap(&context);
 		piece = new_piece_to_place();
@@ -36,5 +37,7 @@ int	main(void)
 			get_board_width();
 			update_board(&context);
 		}
+		debug_out_str("END\n");
 	}
+	debug_out_str("GAME FINISHED\n");
 }

@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 13:30:12 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/19 15:39:23 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/20 13:42:44 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ void	print_heatmap_spot(t_filler_context *context,
 		enemy_char = P1;
 	spot_char = ft_tolower((context->board)[row][col]);
 	if (spot_char == context->player_char)
-		dprintf(STDERR_FILENO, BOLDCYAN"%2c", context->player_char);
+		dprintf(STDERR_FILENO, BOLDCYAN"%c", context->player_char);
 	else if (spot_char == enemy_char)
-		dprintf(STDERR_FILENO, ANSI_RESET""RED"%2c", enemy_char);
+		dprintf(STDERR_FILENO, ANSI_RESET""RED"%c", enemy_char);
 	else
-		dprintf(STDERR_FILENO, "%s%2d", color, (context->heatmap)[row][col]);
+		dprintf(STDERR_FILENO, "%s#", color);
 }
 
 void	print_heatmap(t_filler_context *context)
@@ -47,6 +47,7 @@ void	print_heatmap(t_filler_context *context)
 	while (++row < context->board_height)
 	{
 		col = -1;
+		write(STDERR_FILENO, ANSI_RESET"\n    ", 9);
 		while (++col < context->board_width)
 		{
 			num = (context->heatmap)[row][col] - max;
@@ -55,7 +56,7 @@ void	print_heatmap(t_filler_context *context)
 								get_g(num, max),
 								get_b(num, max)));
 		}
-		write(STDERR_FILENO, ANSI_RESET"\n", 5);
 	}
-	dprintf(STDERR_FILENO, "\033[%dA", (context->board_height));
+	dprintf(STDERR_FILENO, ANSI_RESET);
+	dprintf(STDERR_FILENO, "\n\033[%dA"ANSI_RESET, (context->board_height) + 1);
 }

@@ -6,11 +6,29 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 20:38:00 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/20 11:51:03 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/20 13:58:06 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
+
+void	correct_piece(t_piece *max_spot, t_piece *max_piece, t_piece *root)
+{
+	int		row_offset;
+	int		col_offset;
+	t_piece	*iter;
+
+	row_offset = max_spot->row_rel - (max_piece)->row_rel;
+	col_offset = max_spot->col_rel - (max_piece)->col_rel;
+
+	iter = root;
+	while (iter != NULL)
+	{
+		iter->row_rel += row_offset;
+		iter->col_rel += col_offset;
+		iter = iter->next;
+	}
+}
 
 void	write_move(t_piece *max_spot, t_piece *max_piece_place)
 {
@@ -31,8 +49,8 @@ int		place_piece(t_filler_context *context, t_piece *piece)
 	t_piece	*iter;
 	t_piece	*piece_place;
 	int		valid;
-	int		row;
-	int		col;
+	// int		row;
+	// int		col;
 
 	t_piece	*max_spot;
 	t_piece	*max_piece_place;
@@ -54,16 +72,21 @@ int		place_piece(t_filler_context *context, t_piece *piece)
 			valid = 1;
 			curr_sum = 0;
 			iter = piece->next;
-			while (iter != NULL && valid == 1)
-			{
-				row = spot->row_rel + (iter->row_rel - piece_place->row_rel);
-				col = spot->col_rel + (iter->col_rel - piece_place->col_rel);
-				if (iter != piece_place && valid_placement(row, col, context) == 0)
-					valid = 0;
-				else
-					curr_sum += (context->heatmap)[row][col];
-				iter = iter->next;
-			}
+
+
+			// while (iter != NULL && valid == 1)
+			// {
+			// 	row = spot->row_rel + (iter->row_rel - piece_place->row_rel);
+			// 	col = spot->col_rel + (iter->col_rel - piece_place->col_rel);
+			// 	if (iter != piece_place && valid_placement(row, col, context) == 0)
+			// 		valid = 0;
+			// 	else
+			// 		curr_sum += (context->heatmap)[row][col];
+			// 	iter = iter->next;
+			// }
+			curr_sum = get_sum(piece->next, context, piece_place, spot);
+
+
 			if (valid == 1 && max_sum < curr_sum)
 			{
 				max_sum = curr_sum;
@@ -78,24 +101,7 @@ int		place_piece(t_filler_context *context, t_piece *piece)
 	write_move(max_spot, max_piece_place);
 	if (max_spot == NULL || max_piece_place == NULL)
 		return (0);
-
-	int		row_offset;
-	int		col_offset;
-
-	row_offset = max_spot->row_rel - (max_piece_place)->row_rel;
-	col_offset = max_spot->col_rel - (max_piece_place)->col_rel;
-
-	iter = piece->next;
-	if (iter == max_piece_place)
-		piece = piece->next;
-	while (iter != NULL)
-	{
-		iter->row_rel += row_offset;
-		iter->col_rel += col_offset;
-		if (iter->next == max_piece_place)
-			iter->next = iter->next->next;
-		iter = iter->next;
-	}
+	correct_piece(max_spot, max_piece_place, piece);
 	spot = context->player;
 	while (spot->next != NULL)
 		spot = spot->next;

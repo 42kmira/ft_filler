@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 18:44:41 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/19 11:01:47 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/20 13:41:08 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,3 +48,26 @@ int		valid_placement(int row, int col, t_filler_context *context)
 		result = 0;
 	return (result);
 }
+
+int		get_sum(t_piece *root, t_filler_context *context, t_piece *piece_place, t_piece *spot)
+{
+	int		row;
+	int		col;
+	int		result;
+	t_piece	*iter;
+
+	result = 0;
+	iter = root;
+	while (iter != NULL)
+	{
+		row = spot->row_rel + (iter->row_rel - piece_place->row_rel);
+		col = spot->col_rel + (iter->col_rel - piece_place->col_rel);
+		if (iter != piece_place && valid_placement(row, col, context) == 0)
+			return (-2147483648);
+		else
+			result += (context->heatmap)[row][col];
+		iter = iter->next;
+	}
+	return (result);
+}
+
