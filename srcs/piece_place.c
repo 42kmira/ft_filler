@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 20:38:00 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/19 15:14:16 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/20 11:51:03 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,27 +84,21 @@ int		place_piece(t_filler_context *context, t_piece *piece)
 
 	row_offset = max_spot->row_rel - (max_piece_place)->row_rel;
 	col_offset = max_spot->col_rel - (max_piece_place)->col_rel;
+
 	iter = piece->next;
+	if (iter == max_piece_place)
+		piece = piece->next;
 	while (iter != NULL)
 	{
 		iter->row_rel += row_offset;
 		iter->col_rel += col_offset;
+		if (iter->next == max_piece_place)
+			iter->next = iter->next->next;
 		iter = iter->next;
 	}
-	iter = piece->next;
 	spot = context->player;
 	while (spot->next != NULL)
 		spot = spot->next;
-	while (iter != NULL)
-	{
-		if (iter == max_piece_place)
-			iter = iter->next;
-		spot->next = iter;
-		if (iter != NULL)
-		{
-			spot = spot->next;
-			iter = iter->next;
-		}
-	}
+	spot->next = piece->next;
 	return (1);
 }

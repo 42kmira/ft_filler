@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:29:02 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/19 15:15:26 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/19 15:38:03 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,12 @@ void	free_piece(t_piece *piece)
 	}
 }
 
-void	fill_piece(char **piece_board, int piece_height,
-					int piece_width, t_piece *piece)
+t_piece	*fill_piece(char **piece_board, int piece_height,
+					int piece_width)
 {
 	int		row;
 	int		col;
+	t_piece	*piece;
 
 	row = 0;
 	piece = make_piece(0, 0);
@@ -94,6 +95,7 @@ void	fill_piece(char **piece_board, int piece_height,
 		}
 		row++;
 	}
+	return (piece);
 }
 
 t_piece	*new_piece_to_place(void)
@@ -109,6 +111,6 @@ t_piece	*new_piece_to_place(void)
 	piece_height = read_num();
 	piece_width = read_num();
 	piece_board = get_piece_board(piece_height, piece_width);
-	fill_piece(piece_board, piece_height, piece_width, piece);
+	piece = fill_piece(piece_board, piece_height, piece_width);
 	return (piece);
 }
