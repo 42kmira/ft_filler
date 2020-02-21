@@ -6,7 +6,7 @@
 #    By: kmira <kmira@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/07 02:00:29 by kmira             #+#    #+#              #
-#    Updated: 2020/02/20 13:51:12 by kmira            ###   ########.fr        #
+#    Updated: 2020/02/20 16:20:04 by kmira            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,7 @@ play:
 	./filler_vm -p1 resource/players/$(NAME) -f resource/maps/map00
 
 hard:
-	./filler_vm -p1 resource/players/$(NAME) -p2 resource/players/quiet.filler -f resource/maps/map05
+	./filler_vm -p1 resource/players/$(NAME) -p2 resource/players/quiet.filler -f resource/maps/map05 > /dev/null
 
 map:
 	./filler_vm -p1 resource/players/$(NAME) -f resource/maps/$(MAP)

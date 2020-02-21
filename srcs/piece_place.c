@@ -6,21 +6,23 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 20:38:00 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/20 13:58:06 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/20 16:35:38 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 
-void	correct_piece(t_piece *max_spot, t_piece *max_piece, t_piece *root)
+void	correct_piece(t_piece *max_spot, t_piece *max_piece,
+						t_piece *root, t_piece **player)
 {
 	int		row_offset;
 	int		col_offset;
 	t_piece	*iter;
 
+	if (max_spot == NULL || max_piece == NULL)
+		return ;
 	row_offset = max_spot->row_rel - (max_piece)->row_rel;
 	col_offset = max_spot->col_rel - (max_piece)->col_rel;
-
 	iter = root;
 	while (iter != NULL)
 	{
@@ -28,6 +30,10 @@ void	correct_piece(t_piece *max_spot, t_piece *max_piece, t_piece *root)
 		iter->col_rel += col_offset;
 		iter = iter->next;
 	}
+	iter = *player;
+	while (iter->next != NULL)
+		iter = iter->next;
+	iter->next = root->next;
 }
 
 void	write_move(t_piece *max_spot, t_piece *max_piece_place)
@@ -40,71 +46,38 @@ void	write_move(t_piece *max_spot, t_piece *max_piece_place)
 		ft_putchar_fd('\n', 1);
 	}
 	else
+	{
 		write(1, "0 0\n", 4);
+		errno = EBADMSG;
+	}
 }
 
-int		place_piece(t_filler_context *context, t_piece *piece)
+void	place_piece(t_filler_context *context,
+						t_piece *piece, t_piece *player)
 {
-	t_piece	*spot;
-	t_piece	*iter;
 	t_piece	*piece_place;
-	int		valid;
-	// int		row;
-	// int		col;
-
 	t_piece	*max_spot;
 	t_piece	*max_piece_place;
-	int		curr_sum;
 	int		max_sum;
 
 	max_spot = NULL;
+	max_sum = INT_MIN;
 	max_piece_place = NULL;
-	max_sum = -2147483648;
-
-	spot = context->player;
-	while (spot != NULL)
+	while (player != NULL)
 	{
-// first is 0 0 0 0, second is piece of intersect and
-// last is where verification starts.
 		piece_place = piece->next;
 		while (piece_place != NULL)
 		{
-			valid = 1;
-			curr_sum = 0;
-			iter = piece->next;
-
-
-			// while (iter != NULL && valid == 1)
-			// {
-			// 	row = spot->row_rel + (iter->row_rel - piece_place->row_rel);
-			// 	col = spot->col_rel + (iter->col_rel - piece_place->col_rel);
-			// 	if (iter != piece_place && valid_placement(row, col, context) == 0)
-			// 		valid = 0;
-			// 	else
-			// 		curr_sum += (context->heatmap)[row][col];
-			// 	iter = iter->next;
-			// }
-			curr_sum = get_sum(piece->next, context, piece_place, spot);
-
-
-			if (valid == 1 && max_sum < curr_sum)
+			if (max_sum < get_sum(piece->next, context, piece_place, player))
 			{
-				max_sum = curr_sum;
-				max_spot = spot;
+				max_sum = get_sum(piece->next, context, piece_place, player);
+				max_spot = player;
 				max_piece_place = piece_place;
 			}
 			piece_place = piece_place->next;
 		}
-		spot = spot->next;
+		player = player->next;
 	}
-
 	write_move(max_spot, max_piece_place);
-	if (max_spot == NULL || max_piece_place == NULL)
-		return (0);
-	correct_piece(max_spot, max_piece_place, piece);
-	spot = context->player;
-	while (spot->next != NULL)
-		spot = spot->next;
-	spot->next = piece->next;
-	return (1);
+	correct_piece(max_spot, max_piece_place, piece, &context->player);
 }

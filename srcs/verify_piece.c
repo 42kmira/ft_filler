@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 18:44:41 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/20 13:41:08 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/20 16:33:18 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ int		valid_placement(int row, int col, t_filler_context *context)
 	return (result);
 }
 
-int		get_sum(t_piece *root, t_filler_context *context, t_piece *piece_place, t_piece *spot)
+int		get_sum(t_piece *root, t_filler_context *context,
+				t_piece *piece_place, t_piece *spot)
 {
 	int		row;
 	int		col;
@@ -70,4 +71,3 @@ int		get_sum(t_piece *root, t_filler_context *context, t_piece *piece_place, t_p
 	}
 	return (result);
 }
-

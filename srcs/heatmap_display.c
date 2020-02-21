@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 13:30:12 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/20 13:42:44 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/20 16:34:19 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,5 @@ void	print_heatmap(t_filler_context *context)
 								get_b(num, max)));
 		}
 	}
-	dprintf(STDERR_FILENO, ANSI_RESET);
 	dprintf(STDERR_FILENO, "\n\033[%dA"ANSI_RESET, (context->board_height) + 1);
 }
