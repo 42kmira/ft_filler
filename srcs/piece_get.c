@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:29:02 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/19 15:38:03 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/20 16:52:58 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,20 +59,6 @@ char	**get_piece_board(int piece_height, int piece_width)
 	result[row] = NULL;
 	read(STDIN_FILENO, &row, 1);
 	return (result);
-}
-
-void	free_piece(t_piece *piece)
-{
-	t_piece	*iter;
-	t_piece	*release;
-
-	iter = piece;
-	while (iter != NULL)
-	{
-		release = iter;
-		iter = iter->next;
-		free(release);
-	}
 }
 
 t_piece	*fill_piece(char **piece_board, int piece_height,

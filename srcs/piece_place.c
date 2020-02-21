@@ -6,11 +6,25 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 20:38:00 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/20 16:35:38 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/20 16:53:04 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
+
+void	free_piece(t_piece *piece)
+{
+	t_piece	*iter;
+	t_piece	*release;
+
+	iter = piece;
+	while (iter != NULL)
+	{
+		release = iter;
+		iter = iter->next;
+		free(release);
+	}
+}
 
 void	correct_piece(t_piece *max_spot, t_piece *max_piece,
 						t_piece *root, t_piece **player)
