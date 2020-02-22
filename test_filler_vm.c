@@ -1,46 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stdin_ptr_move.c                                   :+:      :+:    :+:   */
+/*   test_filler_vm.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/19 10:51:48 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/21 17:58:55 by kmira            ###   ########.fr       */
+/*   Created: 2020/02/21 16:58:21 by kmira             #+#    #+#             */
+/*   Updated: 2020/02/21 18:08:13 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "filler.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include "includes/color.h"
 
-int		read_num(void)
+#define STOP 500
+
+int	main(void)
 {
-	int		i;
-	int		result;
-	char	number[DIGIT_LEN];
+	int	i;
 
 	i = 0;
-	read(STDIN_FILENO, &number[i], 1);
-	while (i < DIGIT_LEN && ft_isdigit(number[i]))
+	while (i < STOP)
 	{
+		printf(PURPLE"Start of test %d"COLOR_RESET"\n", i);
+		system("make play");
+		printf(PURPLE"END of test %d"COLOR_RESET"\n", i);
 		i++;
-		read(STDIN_FILENO, &number[i], 1);
 	}
-	result = ft_atoi(number);
-	return (result);
-}
-
-int		get_board_height(void)
-{
-	int		result;
-
-	result = read_num();
-	return (result);
-}
-
-int		get_board_width(void)
-{
-	int		result;
-
-	result = read_num();
-	return (result);
+	return (0);
 }

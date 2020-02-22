@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:29:02 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/20 16:52:58 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/22 15:27:20 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	append_piece(t_piece **piece_head, int row, int col)
 char	**get_piece_board(int piece_height, int piece_width)
 {
 	int		row;
+	int		col;
 	char	**result;
 
 	row = 0;
@@ -52,7 +53,13 @@ char	**get_piece_board(int piece_height, int piece_width)
 		result[row] = malloc(sizeof(**result) * (piece_width + 10));
 		ft_bzero(result[row], sizeof(**result) * (piece_width + 10));
 		read(STDIN_FILENO, result[row], 1);
-		read(STDIN_FILENO, result[row], piece_width);
+		// read(STDIN_FILENO, result[row], piece_width);
+		col = 0;
+		while (col < piece_width)
+		{
+			read(STDIN_FILENO, &result[row][col], 1);
+			col++;
+		}
 		result[row][piece_width] = '\0';
 		row++;
 	}
@@ -98,5 +105,6 @@ t_piece	*new_piece_to_place(void)
 	piece_width = read_num();
 	piece_board = get_piece_board(piece_height, piece_width);
 	piece = fill_piece(piece_board, piece_height, piece_width);
+	free_piece_board(piece_board, piece_height);
 	return (piece);
 }

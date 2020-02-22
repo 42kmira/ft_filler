@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 01:56:57 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/20 16:28:31 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/22 15:27:01 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int					get_r(int num, int max);
 int					get_b(int num, int max);
 int					get_g(int num, int max);
 
-char				*colour_code(uint8_t red, uint8_t green, uint8_t blue);
+char				*colour_code(uint8_t red, uint8_t green, uint8_t blue, char *dest);
 
 void				print_heatmap(t_filler_context *context);
 
@@ -74,5 +74,13 @@ void				free_piece(t_piece *piece);
 int					valid_placement(int row, int col, t_filler_context *contex);
 int					out_out_bounds(int row, int col, t_filler_context *context);
 int					get_sum(t_piece *root, t_filler_context *context, t_piece *piece_place, t_piece *spot);
+
+/*
+** -_---_-_-  -_---_-_-  -_---_-_-  -_---_-_-  -_---_-_-  -_---_-_-  -_---_-_-
+** FILES: free_context.c
+*/
+
+void	deconstruct_filler_context(t_filler_context *context);
+void	free_piece_board(char **piece_board, int piece_height);
 
 #endif

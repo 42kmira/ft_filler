@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 13:30:12 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/20 16:34:19 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/22 15:24:45 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ void	print_heatmap(t_filler_context *context)
 	int		col;
 	int		num;
 	int		max;
+	char	result[50];
 
 	if (context->board_height > context->board_width)
-		max = context->board_height;
+		max = context->board_height / 2;
 	else
-		max = context->board_width;
+		max = context->board_width / 2;
 	row = -1;
-	max = max / 2;
 	while (++row < context->board_height)
 	{
 		col = -1;
@@ -54,7 +54,7 @@ void	print_heatmap(t_filler_context *context)
 			print_heatmap_spot(context, row, col,
 					colour_code(get_r(num, max),
 								get_g(num, max),
-								get_b(num, max)));
+								get_b(num, max), result));
 		}
 	}
 	dprintf(STDERR_FILENO, "\n\033[%dA"ANSI_RESET, (context->board_height) + 1);

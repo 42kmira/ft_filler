@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 13:14:04 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/18 22:51:45 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/22 15:22:21 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,8 @@ int		get_g(int num, int max)
 	return ((int)green);
 }
 
-char	*colour_code(uint8_t red, uint8_t green, uint8_t blue)
+char	*colour_code(uint8_t red, uint8_t green, uint8_t blue, char *dest)
 {
-	char	*result;
-
-	asprintf(&result, "\e[38;2;%d;%d;%dm", red, green, blue);
-	return (result);
+	snprintf(dest, 50, "\e[38;2;%d;%d;%dm", red, green, blue);
+	return (dest);
 }
