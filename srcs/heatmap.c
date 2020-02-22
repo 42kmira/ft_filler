@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 13:37:38 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/19 11:40:08 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/22 15:38:06 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		**create_heatamp(int height, int width)
 
 	row = 0;
 	heatmap = malloc(sizeof(*heatmap) * (height + 1));
-	while (row <= height)
+	while (row < height)
 	{
 		heatmap[row] = malloc(sizeof(**heatmap) * (width + 1));
 		ft_bzero(heatmap[row], sizeof(**heatmap) * (width + 1));

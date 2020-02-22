@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 13:30:12 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/22 15:24:45 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/22 15:54:47 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,27 @@ void	print_heatmap_spot(t_filler_context *context,
 		enemy_char = P1;
 	spot_char = ft_tolower((context->board)[row][col]);
 	if (spot_char == context->player_char)
-		dprintf(STDERR_FILENO, BOLDCYAN"%c", context->player_char);
+	{
+		write(STDERR_FILENO, BOLDCYAN, 9);
+		write(STDERR_FILENO, &context->player_char, 1);
+	}
 	else if (spot_char == enemy_char)
-		dprintf(STDERR_FILENO, ANSI_RESET""RED"%c", enemy_char);
+	{
+		write(STDERR_FILENO, ANSI_RESET""RED, 9);
+		write(STDERR_FILENO, &enemy_char, 1);
+	}
 	else
-		dprintf(STDERR_FILENO, "%s#", color);
+	{
+		ft_putstr_fd(color, STDERR_FILENO);
+		write(STDERR_FILENO, "#", 1);
+	}
+}
+
+void	move_cursor_up(int amount)
+{
+	write(STDERR_FILENO, "\n\033[", 3);
+	ft_putnbr_fd(amount, STDERR_FILENO);
+	write(STDERR_FILENO, "A"ANSI_RESET, 5);
 }
 
 void	print_heatmap(t_filler_context *context)
@@ -57,5 +73,5 @@ void	print_heatmap(t_filler_context *context)
 								get_b(num, max), result));
 		}
 	}
-	dprintf(STDERR_FILENO, "\n\033[%dA"ANSI_RESET, (context->board_height) + 1);
+	move_cursor_up((context->board_height) + 1);
 }
