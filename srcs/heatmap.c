@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 13:37:38 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/22 15:38:06 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/22 19:00:28 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,15 +85,12 @@ void	update_heatmap(t_filler_context *context)
 	int		max;
 	char	enemy_char;
 
-	if (context->board_width < context->board_height)
-		max = context->board_height;
-	else
-		max = context->board_width;
 	if (context->player_char == P1)
 		enemy_char = P2;
 	else
 		enemy_char = P1;
 	row = -1;
+	max = context->board_height + context->board_width;
 	while (++row < context->board_height)
 	{
 		col = -1;

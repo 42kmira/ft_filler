@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 01:56:57 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/22 15:27:01 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/24 15:28:38 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define P2 'x'
 
 # define DIGIT_LEN 20
+# define COL_BUFF 50
 
 t_filler_context	init_game_context(void);
 void				update_board(t_filler_context *context);
