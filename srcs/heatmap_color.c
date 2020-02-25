@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 13:14:04 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/24 15:32:13 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/24 17:15:18 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ char	*colour_code(uint8_t red, uint8_t green, uint8_t blue, char *dest)
 	red_str = ft_itoa(red);
 	green_str = ft_itoa(green);
 	blue_str = ft_itoa(blue);
-
 	ft_bzero(dest, COL_BUFF);
 	ft_strcat(dest, "\e[38;2;");
 	ft_strcat(dest, red_str);

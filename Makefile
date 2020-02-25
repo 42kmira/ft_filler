@@ -6,7 +6,7 @@
 #    By: kmira <kmira@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/07 02:00:29 by kmira             #+#    #+#              #
-#    Updated: 2020/02/24 17:08:25 by kmira            ###   ########.fr        #
+#    Updated: 2020/02/24 17:13:54 by kmira            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,6 @@ INCS = -I includes
 LIBFT = srcs/libft/libft.a
 
 FILES = \
-	debug \
 	free_context \
 	heatmap_color \
 	heatmap_display \
@@ -64,7 +63,7 @@ save: fclean
 	git push https://github.com/MrColour/filler.git
 
 play:
-	./filler_vm -p1 resource/players/$(NAME) -f resource/maps/map00
+	./filler_vm -p1 resource/players/$(NAME) -f resource/maps/map00 > /dev/null
 
 hard:
 	./filler_vm -p1 resource/players/$(NAME) -p2 resource/players/quiet.filler -f resource/maps/map05 > /dev/null
