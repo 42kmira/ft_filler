@@ -1,22 +1,22 @@
-Process:         kmira.filler [73574]
+Process:         kmira.filler [28437]
 Path:            /nfs/2018/k/kmira/Documents/current/filler/resource/players/kmira.filler
-Load Address:    0x101e8c000
+Load Address:    0x10ef23000
 Identifier:      kmira.filler
 Version:         ???
 Code Type:       X86-64
-Parent Process:  ruby [73573]
+Parent Process:  ruby [28436]
 
-Date/Time:       2020-02-24 15:23:07.410 -0800
-Launch Time:     2020-02-24 15:22:15.374 -0800
+Date/Time:       2020-02-24 17:11:18.089 -0800
+Launch Time:     2020-02-24 17:11:18.039 -0800
 OS Version:      Mac OS X 10.13.4 (17E199)
 Report Version:  7
 Analysis Tool:   /usr/bin/leaks
 
-Physical footprint:         540K
-Physical footprint (peak):  540K
+Physical footprint:         320K
+Physical footprint (peak):  320K
 ----
 
 leaks Report Version: 3.0
-Process 73574: 166 nodes malloced for 13 KB
-Process 73574: 0 leaks for 0 total leaked bytes.
+Process 28437: 160 nodes malloced for 13 KB
+Process 28437: 0 leaks for 0 total leaked bytes.
 

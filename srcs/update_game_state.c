@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 02:51:52 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/22 15:33:24 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/24 16:58:27 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 void				update_board(t_filler_context *context)
 {
 	int		row;
+	int		col;
 	char	*buffer;
 
 	row = 0;
@@ -33,7 +34,13 @@ void				update_board(t_filler_context *context)
 		while (buffer[0] != ' ')
 			read(STDIN_FILENO, buffer, 1);
 		ft_bzero(buffer, sizeof(*buffer) * (context->board_width + 1));
-		read(STDIN_FILENO, buffer, context->board_width);
+		col = 0;
+		while (col < context->board_width)
+		{
+			read(STDIN_FILENO, &buffer[col], 1);
+			col++;
+		}
+		// read(STDIN_FILENO, buffer, context->board_width);
 		ft_strncpy(context->board[row], buffer, context->board_width);
 		read(STDIN_FILENO, buffer, 1);
 		row++;

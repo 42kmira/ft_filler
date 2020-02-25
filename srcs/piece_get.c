@@ -6,7 +6,7 @@
 /*   By: kmira <kmira@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:29:02 by kmira             #+#    #+#             */
-/*   Updated: 2020/02/24 15:10:17 by kmira            ###   ########.fr       */
+/*   Updated: 2020/02/24 17:07:41 by kmira            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,12 @@ char	**get_piece_board(int piece_height, int piece_width)
 		result[row] = malloc(sizeof(**result) * (piece_width + 10));
 		ft_bzero(result[row], sizeof(**result) * (piece_width + 10));
 		read(STDIN_FILENO, result[row], 1);
-		read(STDIN_FILENO, result[row], piece_width);
 		col = 0;
-		// while (col < piece_width)
-		// {
-		// 	read(STDIN_FILENO, &result[row][col], 1);
-		// 	col++;
-		// }
+		while (col < piece_width)
+		{
+			read(STDIN_FILENO, &result[row][col], 1);
+			col++;
+		}
 		result[row][piece_width] = '\0';
 		row++;
 	}
@@ -100,6 +99,7 @@ t_piece	*new_piece_to_place(void)
 	t_piece	*piece;
 
 	piece = NULL;
+	ft_bzero(buff, sizeof(buff));
 	read(STDIN_FILENO, buff, PIECE_);
 	piece_height = read_num();
 	piece_width = read_num();

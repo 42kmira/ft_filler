@@ -6,7 +6,7 @@
 #    By: kmira <kmira@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/07 02:00:29 by kmira             #+#    #+#              #
-#    Updated: 2020/02/24 15:31:34 by kmira            ###   ########.fr        #
+#    Updated: 2020/02/24 17:08:25 by kmira            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,7 @@ save: fclean
 	git push https://github.com/MrColour/filler.git
 
 play:
-	./filler_vm -p1 resource/players/$(NAME) -f resource/maps/map05 > /dev/null
+	./filler_vm -p1 resource/players/$(NAME) -f resource/maps/map00
 
 hard:
 	./filler_vm -p1 resource/players/$(NAME) -p2 resource/players/quiet.filler -f resource/maps/map05 > /dev/null
