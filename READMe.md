@@ -5,7 +5,7 @@
 <br>
 
 This project has us making an program that is able to play a game called filler. The game is played through another program
-that manages the actual game, ```filler_vm```. A map is passed onto the game and one or two player programs are passed. The programs play by taking turns reading stdin and writing to stdout. After running make all, you will make my player ```kmira.filler```.
+that manages the actual game, ```filler_vm```. A map is passed onto the game and one or two player programs are passed. The programs play by taking turns reading stdin and writing to stdout. After running make all, you will make my player ```kmira.filler```. More information about the game can be found in the Introduction of [this](https://github.com/42kmira/ft_filler/blob/master/resources/filler.en.pdf) pdf.
 
 The visualization is being printed out to stderr to avoid conflicts, but will only work by passing the -q option to ```filler_vm``` or by piping the output of ```filler_vm``` to somewhere like ```/dev/null```
 
