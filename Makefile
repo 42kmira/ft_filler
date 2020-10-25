@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kmira <kmira@student.42.fr>                +#+  +:+       +#+         #
+#    By: home <home@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/07 02:00:29 by kmira             #+#    #+#              #
-#    Updated: 2020/02/24 17:13:54 by kmira            ###   ########.fr        #
+#    Updated: 2020/10/24 17:24:10 by home             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,12 +63,9 @@ save: fclean
 	git push https://github.com/MrColour/filler.git
 
 play:
-	./filler_vm -p1 resource/players/$(NAME) -f resource/maps/map00 > /dev/null
+	./filler_vm -f resources/maps/map00 -p1 ./$(NAME) > /dev/null
 
 hard:
-	./filler_vm -p1 resource/players/$(NAME) -p2 resource/players/quiet.filler -f resource/maps/map05 > /dev/null
-
-map:
-	./filler_vm -p1 resource/players/$(NAME) -f resource/maps/$(MAP)
+	./filler_vm -p1 ./kmira.filler -p2 resources/players/hcao.filler -f resources//maps/map01 > /dev/null
 
 .PHONY: all clean fclean re quick save
